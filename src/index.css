@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -28,11 +34,37 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: rgb(205,88,201);
+  background: linear-gradient(0deg, rgba(205,88,201,1) 2%, rgba(238,157,238,1) 100%);
+  position: relative;
+  padding: 0;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: whitesmoke;
+}
+
+h2 {
+  color: whitesmoke;
+}
+
+.question {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin: .5em 0;
+}
+
+p {
+  color: whitesmoke;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
 }
 
 button {
@@ -45,6 +77,8 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin-left: 1em;
+  margin-bottom: .5em;
 }
 button:hover {
   border-color: #646cff;
@@ -52,6 +86,14 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.anya-quiz {
+    position: fixed;
+    width: 200px;
+    bottom: -62px;
+    left: -4%;
+    rotate: 24deg;
 }
 
 @media (prefers-color-scheme: light) {
@@ -64,5 +106,12 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+
+@media (min-width: 680px) {
+  .btn-container {
+    display: inline-block;
   }
 }

@@ -5,7 +5,7 @@ function StartQuiz(props) {
 
     return (
         <div>
-            <h1>Quizzical</h1>
+            <h1>Anime Quiz</h1>
             <p>Test your anime knowledge!</p>
             <button onClick={props.toggleStartQuiz}>Start Quiz</button>
         </div>

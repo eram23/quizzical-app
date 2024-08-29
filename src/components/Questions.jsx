@@ -6,7 +6,7 @@ export default function Questions(props) {
     
     return (
         <>
-            <h2>{decode(props.question)}</h2>
+            <p className='question'>{decode(props.question)}</p>
         </>
     )
 }

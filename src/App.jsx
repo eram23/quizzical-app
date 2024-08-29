@@ -90,6 +90,9 @@ function App(props) {
   function trackAnswer(index, answer) {
     let btnClicked = answer
     
+    if (answer === userAnswers[index]) {
+      console.log('this btn clicked')
+    }
         setUserAnswers(prevData => {
           return {
             ...prevData,
@@ -136,6 +139,8 @@ function App(props) {
       {startQuiz === true ? 
         
         <form className='quiz-form' onSubmit={onSubmit}>
+          <img className='anya-quiz' src='src\assets\anya.png' />
+          <h2>Anime Quiz</h2>
           {getQuiz()}
           {/* map below grabs each question and puts it into the Question component as a prop */}
           <button onClick={results === false ? onSubmit : tryAgain}>{results === false ? 'Check Answers' : 'Try Again'}</button>
