@@ -8,8 +8,6 @@ import { nanoid } from 'nanoid'
 function App(props) {
   const [startQuiz, setStartQuiz] = useState(false) 
   const [quizData, setQuizData] = useState([])
-  let score = 0
-
   const [results, setResults] = useState(false)
   const [userAnswers, setUserAnswers] = useState({
     0: '',
@@ -17,6 +15,7 @@ function App(props) {
     2: '',
     3: ''
   })
+  let score = 0
   
   // fetches quiz data only when called
   function fetchQuizData() {
@@ -41,6 +40,36 @@ function App(props) {
   useEffect(() => {
     fetchQuizData()
   }, [])
+
+  function trackAnswer(index, answer) {
+    console.log(index, answer)
+
+     
+
+    
+
+    setUserAnswers(prevData => {
+      return {
+        ...prevData,
+        [index]: answer
+      }
+    })
+  }
+
+  // checks what answers are correct and incorrect
+  function checkAnswers(num) {
+    quizData.map((quizItem, index) => {
+      if(quizItem.correct_answer === userAnswers[index]) {
+        console.log("correct !")
+        num += 1
+      } else {
+        console.log('incorrect')
+      }
+    })
+    return num
+  }
+
+  
 
 
 
@@ -75,7 +104,7 @@ function App(props) {
           <Answers
           key={quizObj.id}
           answers={quizObj.answers}
-          trackAnswer={(e) => trackAnswer(index, e.target.innerText)}
+          handleClick={(e) => trackAnswer(index, e.target.innerText)}
           />
           <br />
           <br />
@@ -85,43 +114,16 @@ function App(props) {
 
     return quiz
   }
+  
 
-  // updates state of selected answers
-  function trackAnswer(index, answer) {
-    let btnClicked = answer
-    
-    if (answer === userAnswers[index]) {
-      console.log('this btn clicked')
-    }
-        setUserAnswers(prevData => {
-          return {
-            ...prevData,
-            [index]: btnClicked
-          }
-        })
-        console.log(userAnswers)
-        
-    
-  }
-
-  // checks what answers are correct and incorrect
-  function checkAnswers(num) {
-    quizData.map((quizItem, index) => {
-      if(quizItem.correct_answer === userAnswers[index]) {
-        console.log("correct !")
-        num += 1
-      }
-    })
-    console.log(num)
-    return num
-  }
 
 
   function onSubmit(event) {
     event.preventDefault() 
-    checkAnswers(score) 
+     
     setResults(prevValue => !prevValue)
   }
+  
 
   // resets quiz, score, result state, and user answers
   function tryAgain(event) {
@@ -142,8 +144,11 @@ function App(props) {
           <img className='anya-quiz' src='src\assets\anya.png' />
           <h2>Anime Quiz</h2>
           {getQuiz()}
-          {/* map below grabs each question and puts it into the Question component as a prop */}
-          <button onClick={results === false ? onSubmit : tryAgain}>{results === false ? 'Check Answers' : 'Try Again'}</button>
+          <button 
+            onClick={results === false ? onSubmit : tryAgain}
+          >
+            {results === false ? 'Check Answers' : 'Try Again'}
+          </button>
           {results && <p>You scored {checkAnswers(score)}/5 answers</p> }
         </form>
       :
