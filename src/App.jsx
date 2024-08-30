@@ -15,6 +15,7 @@ function App(props) {
     2: '',
     3: ''
   })
+    
   let score = 0
   
   // fetches quiz data only when called
@@ -44,16 +45,12 @@ function App(props) {
   function trackAnswer(index, answer) {
     console.log(index, answer)
 
-     
-
-    
-
     setUserAnswers(prevData => {
       return {
         ...prevData,
-        [index]: answer
+          [index]: answer,
       }
-    })
+      })
   }
 
   // checks what answers are correct and incorrect
@@ -104,7 +101,9 @@ function App(props) {
           <Answers
           key={quizObj.id}
           answers={quizObj.answers}
-          handleClick={(e) => trackAnswer(index, e.target.innerText)}
+          trackAnswer={trackAnswer}
+          index={index}
+          userAnswers={userAnswers}
           />
           <br />
           <br />

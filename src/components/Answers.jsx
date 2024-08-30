@@ -8,14 +8,17 @@ import { useState, useEffect } from 'react'
 
 export default function Answers(props) {
     
+    
     // maps over answers data and returns a Button component for each answer choice
     const answerOptions = props.answers.map((answer, index) => {
         return (
             <Button
-            key={index} 
+            key={props.key} 
+            index={props.index}
             answer={answer} 
-            handleClick={props.handleClick}
-            isSelected={props.isSelected}
+            trackAnswer={props.trackAnswer}
+            quizData={props.quizData}
+            userAnswers={props.userAnswers}
             />
         )
     })
@@ -30,22 +33,32 @@ export default function Answers(props) {
 function Button(props) {
     const [answerSelected, setAnswerSelected] = useState(false)
 
+    function toggleSelectedAnswer(index, eventTarget) {
+        console.log(eventTarget, props.userAnswers[index])
+        
+        setAnswerSelected(prevValue => !prevValue)
+        // if (props.userAnswers[index] !== eventTarget.innerText) {
+        //     setAnswerSelected(false)
+
+        // } 
+    }
 
     const styleSelected = {
-        // border: props.isSelected ? '3px solid #6CA7FF' : 'none'
-        // border: '3px solid #6CA7FF' 
+        border: answerSelected ? '3px solid #6CA7FF' : 'none'
+        // border: '2px solid #6CA7FF' 
     }
     
-    //  if (userAnswers[index] === answer) {
-    //     setAnswerSelected(true)
-    //   }
-
+    
     return (
             <button 
                 type='button'
-                key={props.index}
-                onClick={props.handleClick}
+                key={props.key}
+                onClick={(e) => {
+                    props.trackAnswer(props.index, e.target.innerText)
+                    toggleSelectedAnswer(props.index, e.target)
+                }} 
                 style={styleSelected}
+                userAnswers={props.userAnswers}
                 >
                 {decode(props.answer)}
             </button>
