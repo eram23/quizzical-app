@@ -1,6 +1,8 @@
 import { decode } from 'html-entities';
+import { nanoid } from 'nanoid';
 import React from 'react'
 import { useState, useEffect } from 'react'
+import classNames from 'classnames'
 
 
 
@@ -8,17 +10,26 @@ import { useState, useEffect } from 'react'
 
 export default function Answers(props) {
     
+    const [answerSelected, setAnswerSelected] = useState(false)
+
+    function toggleSelectedAnswer(index, eventTarget) {
+        console.log(props.userAnswers, props.quizData)
+
+        setAnswerSelected(prevValue => !prevValue)
+    }
     
     // maps over answers data and returns a Button component for each answer choice
     const answerOptions = props.answers.map((answer, index) => {
         return (
             <Button
-            key={props.key} 
             index={props.index}
             answer={answer} 
             trackAnswer={props.trackAnswer}
+            toggleSelectedAnswer={toggleSelectedAnswer}
             quizData={props.quizData}
             userAnswers={props.userAnswers}
+            answerSelected={answerSelected}
+            results={props.results}
             />
         )
     })
@@ -30,37 +41,34 @@ export default function Answers(props) {
     )
 }
 
-function Button(props) {
-    const [answerSelected, setAnswerSelected] = useState(false)
-
-    function toggleSelectedAnswer(index, eventTarget) {
-        console.log(eventTarget, props.userAnswers[index])
-        
-        setAnswerSelected(prevValue => !prevValue)
-        // if (props.userAnswers[index] !== eventTarget.innerText) {
-        //     setAnswerSelected(false)
-
-        // } 
-    }
-
+function Button({index, userAnswers, answerSelected, answer, quizData, results, trackAnswer, toggleSelectedAnswer }) {
+    
     const styleSelected = {
-        border: answerSelected ? '3px solid #6CA7FF' : 'none'
-        // border: '2px solid #6CA7FF' 
+        outline: answerSelected && userAnswers[index]  === decode(answer) ? '3px solid #6CA7FF' : null
     }
     
+    const btnClasses = classNames({
+        button: true,
+        'correct': answerSelected && results && userAnswers[index]  === answer && userAnswers[index] === quizData[index].correct_answer,
+        'incorrect': answerSelected && results && userAnswers[index]  === answer && userAnswers[index] !== quizData[index].correct_answer,
+        'correct-not-picked': results && quizData[index].correct_answer !== userAnswers[index] && quizData[index].correct_answer === answer,
+    })
+    // 'correct-not-picked': results && userAnswers[index]  === answer && quizData[index].incorrect_answers.includes(userAnswers[index])
     
     return (
             <button 
                 type='button'
-                key={props.key}
+                index={index}
+                id={nanoid()}
                 onClick={(e) => {
-                    props.trackAnswer(props.index, e.target.innerText)
-                    toggleSelectedAnswer(props.index, e.target)
+                    trackAnswer(index, e.target.innerText)
+                    toggleSelectedAnswer()
                 }} 
                 style={styleSelected}
-                userAnswers={props.userAnswers}
+                className={btnClasses}
+                // answerSelected={answerSelected}
                 >
-                {decode(props.answer)}
+                {decode(answer)}
             </button>
         )
 }

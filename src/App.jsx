@@ -13,7 +13,8 @@ function App(props) {
     0: '',
     1: '',
     2: '',
-    3: ''
+    3: '',
+    4: ''
   })
     
   let score = 0
@@ -104,6 +105,8 @@ function App(props) {
           trackAnswer={trackAnswer}
           index={index}
           userAnswers={userAnswers}
+          quizData={quizData}
+          results={results}
           />
           <br />
           <br />
@@ -119,7 +122,6 @@ function App(props) {
 
   function onSubmit(event) {
     event.preventDefault() 
-     
     setResults(prevValue => !prevValue)
   }
   
@@ -129,6 +131,13 @@ function App(props) {
     event.preventDefault() 
     setStartQuiz(prevValue => prevValue = false)
     setResults(prevValue => prevValue = false)
+    // setUserAnswers({
+    // 0: '',
+    // 1: '',
+    // 2: '',
+    // 3: '',
+    // 4: ''
+    // })
     score = 0
     fetchQuizData()
     getQuiz()

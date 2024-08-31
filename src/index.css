@@ -88,6 +88,22 @@ button:focus-visible {
   outline: none;
 }
 
+
+.correct {
+  background-color: #68CD96;
+  color: whitesmoke;
+}
+
+.correct-not-picked {
+  background-color: #9fe9c0;
+  
+}
+
+.incorrect {
+  background-color: #FD7D7D;
+  color: whitesmoke;
+}
+
 .anya-quiz {
     position: fixed;
     width: 200px;
