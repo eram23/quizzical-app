@@ -114,10 +114,18 @@ button:focus-visible {
 
 .anya-quiz {
     position: fixed;
-    width: 200px;
-    bottom: -62px;
+    width: 20%;
+    bottom: -52px;
     left: -4%;
     rotate: 24deg;
+}
+
+.bond-quiz {
+    position: fixed;
+    width: 20%;
+    bottom: -62px;
+    right: -4%;
+    rotate: -24deg;
 }
 
 @media (prefers-color-scheme: light) {
@@ -130,6 +138,22 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+
+@media (max-width: 680px) {
+  .anya-quiz {
+    width: 25%;
+    bottom: -32px;
+  }
+
+  .bond-quiz {
+      position: fixed;
+      width: 20%;
+      bottom: -28px;
+      right: -4%;
+      rotate: -24deg;
   }
 }
 

@@ -4,6 +4,8 @@ import StartQuiz from './components/StartQuiz'
 import Questions from './components/Questions'
 import Answers from './components/Answers.jsx'
 import { nanoid } from 'nanoid'
+import anyaQuiz from './assets/anya.png'
+import bondQuiz from './assets/bond.png'
 
 function App(props) {
   const [startQuiz, setStartQuiz] = useState(false) 
@@ -149,7 +151,8 @@ function App(props) {
       {startQuiz === true ? 
         
         <form className='quiz-form' onSubmit={onSubmit}>
-          <img className='anya-quiz' src='./src/assets/anya.png' />
+          <img className='anya-quiz' src={anyaQuiz} alt='anime character anya laughing suspiciously'/>
+          <img className='bond-quiz' src={bondQuiz} alt='anime dog bond wearing a bow tie'/>
           <h2>Anime Quiz</h2>
           {getQuiz()}
           <button 
