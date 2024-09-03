@@ -1,4 +1,4 @@
-import { decode } from 'html-entities';
+import { decode } from 'html-entities'
 import { nanoid } from 'nanoid';
 import React from 'react'
 import { useState, useEffect } from 'react'
@@ -15,7 +15,7 @@ export default function Answers(props) {
     function toggleSelectedAnswer(index, eventTarget) {
         console.log(props.userAnswers, props.quizData)
 
-        setAnswerSelected(prevValue => !prevValue)
+        setAnswerSelected(true)
     }
     
     // maps over answers data and returns a Button component for each answer choice
@@ -49,8 +49,8 @@ function Button({index, userAnswers, answerSelected, answer, quizData, results, 
     
     const btnClasses = classNames({
         button: true,
-        'correct': answerSelected && results && userAnswers[index]  === answer && userAnswers[index] === quizData[index].correct_answer,
-        'incorrect': answerSelected && results && userAnswers[index]  === answer && userAnswers[index] !== quizData[index].correct_answer,
+        'correct': answerSelected && results && userAnswers[index]  === decode(answer) && userAnswers[index] === quizData[index].correct_answer,
+        'incorrect': answerSelected && results && userAnswers[index]  === decode(answer) && userAnswers[index] !== quizData[index].correct_answer,
         'correct-not-picked': results && quizData[index].correct_answer !== userAnswers[index] && quizData[index].correct_answer === answer,
     })
     // 'correct-not-picked': results && userAnswers[index]  === answer && quizData[index].incorrect_answers.includes(userAnswers[index])

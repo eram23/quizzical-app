@@ -149,7 +149,7 @@ function App(props) {
       {startQuiz === true ? 
         
         <form className='quiz-form' onSubmit={onSubmit}>
-          <img className='anya-quiz' src='src\assets\anya.png' />
+          <img className='anya-quiz' src='./src/assets/anya.png' />
           <h2>Anime Quiz</h2>
           {getQuiz()}
           <button 

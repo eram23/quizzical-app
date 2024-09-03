@@ -40,6 +40,14 @@ body {
   padding: 0;
 }
 
+.anya-start-quiz {
+  width: 50%;
+}
+
+.start-quiz-section p {
+  margin: 1em 0;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -74,12 +82,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
   margin-left: 1em;
   margin-bottom: .5em;
 }
+
 button:hover {
   border-color: #646cff;
 }
